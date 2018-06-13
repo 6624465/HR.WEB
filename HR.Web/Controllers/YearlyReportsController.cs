@@ -162,7 +162,7 @@ namespace HR.Web.Controllers
                     pdfFormFields.SetField("CompanyName1", sSFHeader.BranchName);
                     pdfFormFields.SetField("BranchName", "");
 
-                    pdfFormFields.SetField("CompanyAddress", (sSFHeader.Address1 != null ? sSFHeader.Address1 : "") + (sSFHeader.Address2 != null ? sSFHeader.Address2 : ""));
+                    pdfFormFields.SetField("CompanyAddress", (sSFHeader.Address1 != null ? sSFHeader.Address1 : "") + (sSFHeader.Address2 != null ? ","  + sSFHeader.Address2 : ""));
                     pdfFormFields.SetField("CompanyAddress1", (sSFHeader.Address3 != null ? "," + sSFHeader.Address3 : "")+ (sSFHeader.Address4 != null ? "," + sSFHeader.Address4 : "") +
                         (sSFHeader.Address5 != null ? "," + sSFHeader.Address5 : "") + (sSFHeader.Address6 != null ? "," +  sSFHeader.Address6 : "") + (sSFHeader.Address7 != null ? "," + sSFHeader.Address7 : "")+
                         (sSFHeader.Address8 != null ? "," + sSFHeader.Address8 : "") + (sSFHeader.Address9 != null ? "," + sSFHeader.Address9 : "") + (sSFHeader.Address10 != null ? "," + sSFHeader.Address10 : "") +
