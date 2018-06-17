@@ -751,7 +751,7 @@ new
         });
         function appendEmail(el) {
             $.ajax({
-                url: '@Url.Content("~/Employee/IsEmailExists?Email=")' + $('#empHeader_UserEmailId').val(),
+                url: '@Url.Content("~/Employee/IsEmailExists?Email=")' + $('#empHeader_UserEmailId').val() ,
                 method: 'get',
                 contentType: 'Json',
                 success: function (result) {
