@@ -287,11 +287,26 @@ namespace HR.Web.Controllers
                 throw ex;
             }
         }
-        public bool IsEmailExists(string Email)
+        public bool IsEmailExists(string Email,int Employeeid)
         {
-            var list = empHeaderBO.GetListByProperty(x => (x.UserEmailId.ToLower() == Email.ToLower())).ToList();
-            int count = list.Count();
-            return (count > 0 ? true : false);
+
+            if (Employeeid == -1 && Email != "")
+            {
+                var list = empHeaderBO.GetListByProperty(x => (x.UserEmailId.ToLower() == Email.ToLower())).ToList();
+                int count = list.Count();
+                return (count > 0 ? true : false);
+            }
+            else if (Email == "")
+            {
+                return false;
+            }
+            else
+            {
+                var list = empHeaderBO.GetListByProperty(x => (x.UserEmailId.ToLower() == Email.ToLower())).Where(x => x.EmployeeId != Employeeid).ToList();
+                int count = list.Count();
+                return (count > 0 ? true : false);
+            }
+               
         }
         public ActionResult DeleteEmployeeDocs(int docdetailid)
         {

@@ -73,9 +73,9 @@ new SelectListItem {Text = "December", Value = "12"}
 <div class="page" style="overflow:visible;">
     <div class="row">
         <div class="col-md-12">
-            <div class="panel panel-default panel-hovered panel-stacked mb10" style="min-height:800px;">
+            <div class="panel panel-default panel-hovered panel-stacked mb10" style="min-height:800px;"> 
                 <div class="panel-heading">
-                    Payslip Batch <span style="color:#ff0000" id="errorMsg"></span>
+                    Payslip Batch <span style="color:#ff0000" id="errorMsg"></span> <span style="color:#ff0000">@ViewData["message"]</span>
                 </div>
                 <div class="panel-body">
                     @using (Html.BeginForm("confirmprocesspayroll", "PayrollBatch", FormMethod.Post, new { id = "confirmprocesspayroll", name = "confirmprocesspayroll" }))
@@ -125,6 +125,9 @@ new SelectListItem {Text = "December", Value = "12"}
                                 @Html.TextBoxFor(x => x.payslipBatchHeader.TotalSalary, new { @class = "form-control input-sm numCss", disabled = "disabled", required = "required" })
                                 @Html.HiddenFor(x => x.payslipBatchHeader.TotalSalary)
 
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" class="btn btn-sm btn-danger" onclick="location.href = '@Url.Content("~/PayrollBatch/DeleteProcessedPayroll?month=" + Model.payslipBatchHeader.Month + "&year=" + Model.payslipBatchHeader.Year)'">Delete</button>
                             </div>
                         </div>
                         <div class="row css5">

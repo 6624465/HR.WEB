@@ -6,13 +6,19 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using HR.Web.Helpers;
-
+using HR.Web.BusinessObjects.Security;
 namespace HR.Web.Controllers
 {
     
     public class AccountController : BaseController
     {
         // GET: Account
+
+        UserBO userBo = null;
+        public AccountController()
+        {
+            userBo = new UserBO(SESSIONOBJ);
+        }
         public ActionResult Login()
         {
             return View();
@@ -37,6 +43,7 @@ namespace HR.Web.Controllers
                         SessionObj sessionObj = new SessionObj()
                         {
                             USERID = user.UserName,
+                            USERNUMBER = userObj.UserId,
                             BRANCHID = userObj.BranchId,
                             BRANCHNAME = dbContext.Branches.Where(x => x.BranchID == userObj.BranchId).FirstOrDefault() == null ? "" :
                              dbContext.Branches.Where(x => x.BranchID == userObj.BranchId).FirstOrDefault().BranchName,
@@ -83,6 +90,29 @@ namespace HR.Web.Controllers
             Session.Abandon();
             Session.Clear();
             FormsAuthentication.SignOut();
+            return RedirectToAction("Login");
+        }
+
+        [HttpGet]
+        public PartialViewResult ChangePassword(int userid)
+        {
+            var userobj = userBo.GetById(userid);
+            return PartialView();
+        }
+
+        [HttpPost]
+        public ActionResult SaveNewPassword(string Password, string newpassword)
+        {
+            var currentuser = userBo.GetById(USERNUMBER);
+            if (currentuser.Password.ToUpper() == Password.ToUpper())
+            {
+                currentuser.Password = newpassword;
+                userBo.Add(currentuser);
+            }
+            else
+            {
+                ViewData["message"] = "Old Password Is Incorrect";
+            }
             return RedirectToAction("Login");
         }
     }

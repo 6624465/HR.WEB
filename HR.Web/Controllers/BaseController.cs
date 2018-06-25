@@ -22,6 +22,8 @@ namespace HR.Web.Controllers
         public int DocumentDetailID { get; set; }
 
         public string FIRSTNAME { get; set; }
+
+        public int USERNUMBER { get; set; }
     }
     [ErrorHandler]
 
@@ -144,8 +146,18 @@ namespace HR.Web.Controllers
                 Session[UTILITY.CONFIG_MANAGER] = value;
             }
         }
+        public int USERNUMBER
+        {
+            get
+            {
+                return ((SessionObj)System.Web.HttpContext.Current.Session[UTILITY.SSN_OBJECT]).USERNUMBER;
+            }
+            set
+            {
+                Session[UTILITY.SSN_USERNUMBER] = value;
+            }
+        }
 
-        
 
         public string GetRoleIcon()
         {

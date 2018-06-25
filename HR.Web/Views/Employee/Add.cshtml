@@ -202,7 +202,7 @@ new { @class = "form-control input-sm" })
                                 </label>
 
 
-                                @if (Model.empHeader.EmployeeId != -1)
+                                @*@if (Model.empHeader.EmployeeId != -1)
                                 {
                                     <div class="col-md-5">
                                         @Html.TextBoxFor(x => x.empHeader.UserEmailId,
@@ -210,13 +210,13 @@ new { @class = "form-control input-sm" })
                                     </div>
                                 }
                                 else
-                                {
+                                {*@
                                     <div class="col-md-5">
                                         @Html.TextBoxFor(x => x.empHeader.UserEmailId,
-new { @class = "form-control input-sm uppercase", onblur = "appendEmail(this)" })
+new { @class = "form-control input-sm uppercase", onblur = "appendEmail(this,"+Model.empHeader.EmployeeId+")" })
                                         <label id="error">Email Already Exists.Please enter another one</label>
                                     </div>
-                                }
+                                @*}*@
 
                                 
                                 <label class="col-md-1 control-label">
@@ -749,9 +749,9 @@ new
 
             $('#loginEmail').val($('#empHeader_UserEmailId').val());
         });
-        function appendEmail(el) {
+        function appendEmail(el,employeeid) {
             $.ajax({
-                url: '@Url.Content("~/Employee/IsEmailExists?Email=")' + $('#empHeader_UserEmailId').val(),
+                url: '@Url.Content("~/Employee/IsEmailExists?Email=")' + $('#empHeader_UserEmailId').val() + '&Employeeid=' + employeeid,
                 method: 'get',
                 contentType: 'Json',
                 success: function (result) {
