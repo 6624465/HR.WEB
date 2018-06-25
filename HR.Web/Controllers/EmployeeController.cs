@@ -113,34 +113,34 @@ namespace HR.Web.Controllers
                             .Join(dbCntx.EmployeeWorkDetails.AdvSearchEmpWorkDetailWhere(empSearch.DOJ, empSearch.Designation, BRANCHID, ROLECODE),
                             c => c.A.EmployeeId, d => d.EmployeeId,
                             (c, d) => new { C = c, D = d })
-                            .Join(dbCntx.Users,
-                            e => e.C.A.EmployeeId, f => f.EmployeeId,
-                            (e, f) => new { E = e, F = f })
+                            //.Join(dbCntx.EmployeePersonalDetails,
+                            //e => e.C.A.EmployeeId, f => f.EmployeeId,
+                            //(e, f) => new { E = e, F = f })
                             //.Join(dbCntx.EmployeeDocumentDetails,
                             //g => g.E.C.A.EmployeeId, h => h.EmployeeId,
                             //(g, h) => new { G = g, H = h })
                             .Select(x => new EmployeeListVm
                             {
-                                EmployeeId = x.E.C.A.EmployeeId,
-                                EmployeeNo = x.E.C.A.IDNumber,
-                                EmployeeName = x.E.C.A.FirstName,
-                                JoiningDate = x.E.D.JoiningDate,
+                                EmployeeId = x.C.A.EmployeeId,
+                                EmployeeNo = x.C.A.IDNumber,
+                                EmployeeName = x.C.A.FirstName,
+                                JoiningDate = x.D.JoiningDate,
                                 JobTitle = dbCntx.LookUps
-                                            .Where(y => y.LookUpID == x.E.D.DesignationId)
+                                            .Where(y => y.LookUpID == x.D.DesignationId)
                                             .FirstOrDefault().LookUpDescription,
-                                ContactNo = x.F.MobileNumber,
-                                PersonalEmailId = x.F.Email,
-                                OfficialEmailId = x.F.Email,
+                                ContactNo = x.C.B.EmergencyContactNumber,
+                                PersonalEmailId = x.C.A.UserEmailId,
+                                OfficialEmailId = x.C.A.UserEmailId,
                                 DocumentDetailID = dbCntx.EmployeeDocumentDetails
-                                .Where(z => z.DocumentType == UTILITY.DOCUMENTTYPEID && z.EmployeeId == x.E.C.A.EmployeeId).FirstOrDefault() == null ? 0 :
+                                .Where(z => z.DocumentType == UTILITY.DOCUMENTTYPEID && z.EmployeeId == x.C.A.EmployeeId).FirstOrDefault() == null ? 0 :
                                 dbCntx.EmployeeDocumentDetails
-                                .Where(z => z.DocumentType == UTILITY.DOCUMENTTYPEID && z.EmployeeId == x.E.C.A.EmployeeId).FirstOrDefault().DocumentDetailID,//x.H.DocumentDetailID,
-                                DateOfBirth = x.E.C.B.DOB,
-                                branchid = x.E.C.A.BranchId,
+                                .Where(z => z.DocumentType == UTILITY.DOCUMENTTYPEID && z.EmployeeId == x.C.A.EmployeeId).FirstOrDefault().DocumentDetailID,//x.H.DocumentDetailID,
+                                DateOfBirth = x.C.B.DOB,
+                                branchid = x.C.A.BranchId,
                                 ProfilePic = dbCntx.EmployeeDocumentDetails
-                                .Where(a => a.DocumentType == UTILITY.DOCUMENTTYPEID && a.EmployeeId == x.E.C.A.EmployeeId).FirstOrDefault() == null ? "" :
+                                .Where(a => a.DocumentType == UTILITY.DOCUMENTTYPEID && a.EmployeeId == x.C.A.EmployeeId).FirstOrDefault() == null ? "" :
                                 dbCntx.EmployeeDocumentDetails
-                                .Where(a => a.DocumentType == UTILITY.DOCUMENTTYPEID && a.EmployeeId == x.E.C.A.EmployeeId).FirstOrDefault().FileName
+                                .Where(a => a.DocumentType == UTILITY.DOCUMENTTYPEID && a.EmployeeId == x.C.A.EmployeeId).FirstOrDefault().FileName
                             });
                 var emplist = list.Where(x => x.branchid == BRANCHID).ToList();
                 var query = emplist.OrderByDescending(x => x.EmployeeId).Skip(skipRows).Take(offSet).ToList().AsEnumerable();
