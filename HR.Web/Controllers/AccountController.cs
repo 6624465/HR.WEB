@@ -101,9 +101,10 @@ namespace HR.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult SaveNewPassword(string Password, string newpassword)
+        public JsonResult SaveNewPassword(string Password, string newpassword)
         {
             var currentuser = userBo.GetById(USERNUMBER);
+            string success = "";
             if (currentuser.Password.ToUpper() == Password.ToUpper())
             {
                 currentuser.Password = newpassword;
@@ -111,9 +112,11 @@ namespace HR.Web.Controllers
             }
             else
             {
-                ViewData["message"] = "Old Password Is Incorrect";
+                success = "Old Password Is Incorrect";
+
             }
-            return RedirectToAction("Login");
+            return Json(new { success });
+            // return RedirectToAction("Login");
         }
     }
 }
