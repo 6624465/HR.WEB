@@ -944,7 +944,7 @@ namespace HR.Web.Controllers
                 int value = 0;
                 for (int i = 0; i < payslipDetail.Count();)
                 {
-                    path = System.Web.Hosting.HostingEnvironment.MapPath("~/PdfTemplates/samplepayslip.pdf");
+                    path = System.Web.Hosting.HostingEnvironment.MapPath("~/PdfTemplates/payslip.pdf");
                     PdfReader reader = new PdfReader(path);
                     value = (PND1detailcount - i) % 7;
 
@@ -968,75 +968,75 @@ namespace HR.Web.Controllers
                 }
             }
         }
-        public static void FillEmployeePaySlip(AcroFields pdfFormFields, List<usp_EmployeePaySlipDetailTH_Result> payslipDetail, int dcount, int validcount, usp_EmployeePaySlipHeaderTH_Result payslipHeader, int month, int year)
-        {
-            try
-            {
-                if (payslipHeader != null)
-                {
+		public static void FillEmployeePaySlip(AcroFields pdfFormFields, List<usp_EmployeePaySlipDetailTH_Result> payslipDetail, int dcount, int validcount, usp_EmployeePaySlipHeaderTH_Result payslipHeader, int month, int year)
+		{
+			try
+			{
+				if (payslipHeader != null)
+				{
 
 
-                    pdfFormFields.SetField("BranchName", payslipHeader.BranchName);
+					pdfFormFields.SetField("BranchName", payslipHeader.BranchName);
 
-                    pdfFormFields.SetField("BranchAddress", payslipHeader.Address1);
-                    pdfFormFields.SetField("BranchTaxCode", payslipHeader.BranchTaxCode);
+					pdfFormFields.SetField("BranchAddress", payslipHeader.Address1);
+					pdfFormFields.SetField("BranchTaxCode", payslipHeader.BranchTaxCode);
 
-                    pdfFormFields.SetField("EmployeeName", payslipHeader.SalutationType + "." + payslipHeader.FirstName.ToString() + (payslipHeader.MiddleName != null ? " " + payslipHeader.MiddleName : ""));
-                    pdfFormFields.SetField("Designation", payslipHeader.EmployeeDescription);
-                    pdfFormFields.SetField("Department", payslipHeader.EmployeeDepartment);
-                    pdfFormFields.SetField("Month", year.ToString());
-                    pdfFormFields.SetField("Year", month.ToString());
+					pdfFormFields.SetField("EmployeeName", payslipHeader.SalutationType + "." + payslipHeader.FirstName.ToString() + (payslipHeader.MiddleName != null ? " " + payslipHeader.MiddleName : ""));
+					pdfFormFields.SetField("Designation", payslipHeader.EmployeeDescription);
+					pdfFormFields.SetField("Department", payslipHeader.EmployeeDepartment);
+					pdfFormFields.SetField("Month", year.ToString());
+					pdfFormFields.SetField("Year", month.ToString());
 
-                    pdfFormFields.SetField("ETOTAL", TotalSalary.ToString());
-                    pdfFormFields.SetField("DTOTAL", TotalDeductions.ToString());
-                    pdfFormFields.SetField("TotalNet", (TotalSalary - TotalDeductions).ToString());
+					pdfFormFields.SetField("ETOTAL", TotalSalary.ToString());
+					pdfFormFields.SetField("DTOTAL", TotalDeductions.ToString());
+					pdfFormFields.SetField("TotalNet", (TotalSalary - TotalDeductions).ToString());
 
 
 
-                    int count = dcount;
-                    for (int i = 0; i < validcount; i++)
-                    {
-                        if (count < payslipDetail.Count)
-                        {
-                            if (payslipDetail[i].RegisterCode == "BASIC SALARY")
-                            {
-                                pdfFormFields.SetField("E" + i, payslipDetail[i].ContributionCode.ToString());
-                                pdfFormFields.SetField("EA" + i, payslipDetail[i].Amount.ToString());
-                            }
+					int count = dcount;
+					for (int i = 0; i < validcount; i++)
+					{
+						if (count < payslipDetail.Count)
+						{
+							if (payslipDetail[i].RegisterCode == "BASIC SALARY")
+							{
+								pdfFormFields.SetField("E" + i, payslipDetail[i].ContributionCode.ToString());
+								pdfFormFields.SetField("EA" + i, payslipDetail[i].Amount.ToString());
+							}
 
-                        }
-                        count++;
-                    }
+						}
+						count++;
+					}
 
-                    count = dcount;
-                    int p = 0;
-                    int validcount2 = validcount * 2;
-                    for (int i = 0; i < validcount2; i++)
-                    {
-                        if (count < payslipDetail.Count)
-                        {
+					count = dcount;
+					int p = 0;
+					int validcount2 = validcount * 2;
+					for (int i = 0; i < validcount2; i++)
+					{
+						if (count < payslipDetail.Count)
+						{
 
-                            if (payslipDetail[i].RegisterCode == "EMPLOYEE CONTRIBUTION")
-                            {
-                                pdfFormFields.SetField("DE" + p, payslipDetail[i].ContributionCode.ToString());
-                                pdfFormFields.SetField("DA" + p, payslipDetail[i].Amount.ToString());
+							if (payslipDetail[i].RegisterCode == "EMPLOYEE CONTRIBUTION")
+							{
+								pdfFormFields.SetField("DE" + p, payslipDetail[i].ContributionCode.ToString());
+								pdfFormFields.SetField("DA" + p, payslipDetail[i].Amount.ToString());
 
-                                p++;
-                            }
-                        }
-                        count++;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+								p++;
+							}
+						}
+						count++;
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				throw;
+			}
 
-        }
+		}
 
-        #endregion
-        private static string MonthName(byte? month)
+		#endregion
+		private static string MonthName(byte? month)
         {
             switch (month)
             {
