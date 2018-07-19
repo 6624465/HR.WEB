@@ -558,5 +558,48 @@ namespace HR.Web.Controllers
             }
             return RedirectToAction("TaxAssessment", new { taxassessmentheader.Year });
         }
+
+        [HttpGet]
+        public ActionResult DeleteProcessedPayroll(int month, int year)
+        {
+
+            bool success = false;
+            string message = "";
+            int Currentmonth = DateTime.Now.Month;
+            int Currentyear = DateTime.Now.Year;
+            var checkpreviousmonths = PayslipbatchheaderBo.GetListByProperty(x => x.BranchId == BRANCHID && x.Month > month && x.Year == year).ToList();
+            if (checkpreviousmonths.Count() > 0)
+            {
+                success = true;
+                message = "Please delete the next months Payroll first.";
+            }
+            else
+            {
+                PayslipBatchHeader DeletePayrollObjheader = PayslipbatchheaderBo.GetByProperty(x => x.BranchId == BRANCHID && x.Month == month && x.Year == year);
+                if (DeletePayrollObjheader != null)
+                {
+                    List<PayslipBatchDetail> DeletePayrollObjdetail = payslipbatchdetailBo.GetListByProperty(x => x.BatchHeaderId == DeletePayrollObjheader.BatchHeaderId).ToList();
+                    if (DeletePayrollObjheader != null)
+                    {
+                        PayslipbatchheaderBo.Delete(DeletePayrollObjheader);
+                        foreach (var item in DeletePayrollObjdetail)
+                        {
+                            payslipbatchdetailBo.Delete(item);
+                        }
+                        success = false;
+                        message = "";
+                    }
+                }
+
+                else
+                {
+                    success = true;
+                    message = "Deletion Is Not Possible Because Payroll is not generated yet For this Month.Please check.";
+                    //ViewData["message"] = "Payroll is not generated yet For this Month.Please check.";
+                }
+            }
+            return Json(new { success, message }, JsonRequestBehavior.AllowGet);
+
+        }
     }
 }

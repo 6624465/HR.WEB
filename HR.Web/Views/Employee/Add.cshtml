@@ -202,7 +202,7 @@ new { @class = "form-control input-sm" })
                                 </label>
 
 
-                                @if (Model.empHeader.EmployeeId != -1)
+                                @*@if (Model.empHeader.EmployeeId != -1)
                                 {
                                     <div class="col-md-5">
                                         @Html.TextBoxFor(x => x.empHeader.UserEmailId,
@@ -210,13 +210,13 @@ new { @class = "form-control input-sm" })
                                     </div>
                                 }
                                 else
-                                {
+                                {*@
                                     <div class="col-md-5">
                                         @Html.TextBoxFor(x => x.empHeader.UserEmailId,
-new { @class = "form-control input-sm uppercase", onblur = "appendEmail(this)" })
+new { @class = "form-control input-sm uppercase", onblur = "appendEmail(this,"+Model.empHeader.EmployeeId+")" })
                                         <label id="error">Email Already Exists.Please enter another one</label>
                                     </div>
-                                }
+                                @*}*@
 
                                 
                                 <label class="col-md-1 control-label">
@@ -349,119 +349,121 @@ new
             <div class="col-md-6">
                 <div class="panel panel-default panel-hovered panel-stacked mb10">
                     <div class="panel-heading">Position</div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="form-group">
-                                <label class="col-md-2 control-label">
-                                    <span>Designation</span>
-                                </label>
-                                <div class="col-md-10">
-                                    @Html.DropDownListFor(x => x.empWorkDetail.DesignationId,
-      SelectListItemHelper.Designation((int)ViewData["BranchId"]),
-      "Select Designation",
-      new { @class = "form-control input-sm" })
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row css5">
-                            <div class="form-group">
-                                <label class="col-md-2 control-label">
-                                    <span>Department</span>
-                                </label>
-                                <div class="col-md-10">
-                                    @Html.DropDownListFor(x => x.empWorkDetail.DepartmentId,
-      SelectListItemHelper.Department(),
-      "Select Department",
-      new { @class = "form-control input-sm" })
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row css5">
-                            <div class="form-group">
-                                <label class="col-md-2 control-label">
-                                    <span>Notice Period</span>
-                                </label>
-                                <div class="col-md-10">
-                                    @Html.DropDownListFor(x => x.empWorkDetail.NoticePeriod,
-      SelectListItemHelper.NoticePeriod(),
-      "Select NoticePeriod",
-      new { @class = "form-control input-sm" })
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row css5">
-                            <div class="form-group">
-                                <label class="col-md-2 control-label">
-                                    <span>Probation</span>
-                                </label>
-                                <div class="col-md-10">
-                                    @Html.DropDownListFor(x => x.empWorkDetail.ProbationPeriod,
-      SelectListItemHelper.ProhibationPeriod(),
-      "Select Probation",
-      new { @class = "form-control input-sm" })
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row css5">
-                            <div class="form-group">
-                                <label class="col-md-2 control-label">
-                                    <span>Confirmation Date</span>
-                                </label>
-                                <div class="col-md-10">
-                                    <div class="input-group date dtCss" id="ConfirmationDate">
-                                        @Html.TextBoxFor(x => x.empWorkDetail.ConfirmationDate, new { @class = "form-control dtCssTxt input-sm" })
-                                        <span class="input-group-addon">
-                                            <i class="ion ion-calendar"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row css5">
-                            <div class="form-group">
-                                <label class="col-md-2 control-label">
-                                    <span>Resigned Date</span>
-                                </label>
-                                <div class="col-md-10">
-                                    <div class="input-group date dtCss" id="ResignationDate">
-                                        @Html.TextBoxFor(x => x.empWorkDetail.ResignationDate, new { @class = "form-control dtCssTxt input-sm" })
-                                        <span class="input-group-addon">
-                                            <i class="ion ion-calendar"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row css5">
-                            <div class="form-group" style="white-space:nowrap">
-                                
-                                <label class="col-md-2 control-label">
-                                    <span>Reporting To</span>
-                                </label>
-                                <div class="col-md-1" style="margin-top:10px">
-                                    @Html.CheckBoxFor(x => x.empHeader.IsReportingAuthority)
+					<div class="panel-body">
+						<div class="row">
+							<div class="form-group">
+								<label class="col-md-2 control-label">
+									<span>Designation</span>
+								</label>
+								<div class="col-md-10">
+									@Html.DropDownListFor(x => x.empWorkDetail.DesignationId,
+	  SelectListItemHelper.Designation((int)ViewData["BranchId"]),
+	  "Select Designation",
+	  new { @class = "form-control input-sm" })
+								</div>
+							</div>
+						</div>
+						<div class="row css5">
+							<div class="form-group">
+								<label class="col-md-2 control-label">
+									<span>Department</span>
+								</label>
+								<div class="col-md-10">
+									@Html.DropDownListFor(x => x.empWorkDetail.DepartmentId,
+	  SelectListItemHelper.Department(),
+	  "Select Department",
+	  new { @class = "form-control input-sm" })
+								</div>
+							</div>
+						</div>
+						<div class="row css5">
+							<div class="form-group">
+								<label class="col-md-2 control-label">
+									<span>Notice Period</span>
+								</label>
+								<div class="col-md-10">
+									@Html.DropDownListFor(x => x.empWorkDetail.NoticePeriod,
+	  SelectListItemHelper.NoticePeriod(),
+	  "Select NoticePeriod",
+	  new { @class = "form-control input-sm" })
+								</div>
+							</div>
+						</div>
+						<div class="row css5">
+							<div class="form-group">
+								<label class="col-md-2 control-label">
+									<span>Probation</span>
+								</label>
+								<div class="col-md-10">
+									@Html.DropDownListFor(x => x.empWorkDetail.ProbationPeriod,
+	  SelectListItemHelper.ProhibationPeriod(),
+	  "Select Probation",
+	  new { @class = "form-control input-sm" })
+								</div>
+							</div>
+						</div>
+						<div class="row css5">
+							<div class="form-group">
+								<label class="col-md-2 control-label">
+									<span>Confirmation Date</span>
+								</label>
+								<div class="col-md-10">
+									<div class="input-group date dtCss" id="ConfirmationDate">
+										@Html.TextBoxFor(x => x.empWorkDetail.ConfirmationDate, new { @class = "form-control dtCssTxt input-sm" })
+										<span class="input-group-addon">
+											<i class="ion ion-calendar"></i>
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row css5">
+							<div class="form-group">
+								<label class="col-md-2 control-label">
+									<span>Resigned Date</span>
+								</label>
+								<div class="col-md-10">
+									<div class="input-group date dtCss" id="ResignationDate">
+										@Html.TextBoxFor(x => x.empWorkDetail.ResignationDate, new { @class = "form-control dtCssTxt input-sm" })
+										<span class="input-group-addon">
+											<i class="ion ion-calendar"></i>
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row css5">
+							<div class="form-group" style="white-space:nowrap">
 
-                                </div>
-                                <div id="isReportingTo">
+								<label class="col-md-2 control-label">
+									<span>Reporting To</span>
+								</label>
 
-                                    <div class="col-md-9">
-                                        @Html.DropDownListFor(x => x.empHeader.ManagerId, SelectListItemHelper.EmployeeList((int)ViewData["BranchId"], true), "Select",
+								<div id="isReportingTo">
+									<div class="col-md-6">
+										@Html.DropDownListFor(x => x.empHeader.ManagerId, SelectListItemHelper.EmployeeList((int)ViewData["BranchId"], true), "Select",
  new { @class = "form-control input-sm" })
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row css5">
-                            <div class="form-group">
-                                <label class="col-md-2 control-label">
-                                    <span>Send Mails To</span>
-                                </label>
-                                <div class="col-md-10">
-                                    @Html.TextBoxFor(x => x.empWorkDetail.SendMailsTo, new { @class = "form-control input-sm uppercase",required="required" })
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+									</div>
+								</div>
+								<div class="col-md-2">
+									<label class="col-md-2 control-label"><span>Authorize</span></label>
+								</div>
+								<div class="col-md-1 pull-left" style="margin-top:10px">
+									@Html.CheckBoxFor(x => x.empHeader.IsReportingAuthority)
+								</div>
+							</div>
+						</div>
+						<div class="row css5">
+							<div class="form-group">
+								<label class="col-md-2 control-label">
+									<span>Send Mails To</span>
+								</label>
+								<div class="col-md-10">
+									@Html.TextBoxFor(x => x.empWorkDetail.SendMailsTo, new { @class = "form-control input-sm uppercase", required = "required" })
+								</div>
+							</div>
+						</div>
+					</div>
                 </div>
             </div>
         </div>
@@ -749,9 +751,9 @@ new
 
             $('#loginEmail').val($('#empHeader_UserEmailId').val());
         });
-        function appendEmail(el) {
+        function appendEmail(el,employeeid) {
             $.ajax({
-                url: '@Url.Content("~/Employee/IsEmailExists?Email=")' + $('#empHeader_UserEmailId').val() ,
+                url: '@Url.Content("~/Employee/IsEmailExists?Email=")' + $('#empHeader_UserEmailId').val(),
                 method: 'get',
                 contentType: 'Json',
                 success: function (result) {
