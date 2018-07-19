@@ -925,7 +925,7 @@ namespace HR.Web.Controllers
         {
             using (var dbCntx = new HrDataContext())
             {
-                usp_EmployeePaySlipHeaderTH_Result PayslipHeader = dbCntx.usp_EmployeePaySlipHeaderTH(BRANCHID, empid, year, month).FirstOrDefault();
+                usp_EmployeePaySlipHeaderTH_Result PayslipHeader = dbCntx.usp_EmployeePaySlipHeaderTH(BRANCHID, empid, month, year).FirstOrDefault();
                 List<usp_EmployeePaySlipDetailTH_Result> payslipDetail = dbCntx.usp_EmployeePaySlipDetailTH(BRANCHID, empid, year, month).ToList();
 
                 pageCount = (payslipDetail.Count() / 7) + 2;
@@ -975,29 +975,29 @@ namespace HR.Web.Controllers
 				if (payslipHeader != null)
 				{
 
-
+					
 					pdfFormFields.SetField("COMPANYNAME", payslipHeader.BranchName);
 
 					//pdfFormFields.SetField("BranchAddress", payslipHeader.Address1);
 					//pdfFormFields.SetField("BranchTaxCode", payslipHeader.BranchTaxCode);
-					pdfFormFields.SetField("EMPNO", "");
+					pdfFormFields.SetField("EMPNO", payslipHeader.EmployeeId.ToString());
 					pdfFormFields.SetField("EMPNAME", payslipHeader.SalutationType + "." + payslipHeader.FirstName.ToString() + (payslipHeader.MiddleName != null ? " " + payslipHeader.MiddleName : ""));
 					//pdfFormFields.SetField("Designation", payslipHeader.EmployeeDescription);
 					pdfFormFields.SetField("DEPT", payslipHeader.EmployeeDepartment);
 					//pdfFormFields.SetField("Month", year.ToString());
 					//pdfFormFields.SetField("Year", month.ToString());
-					pdfFormFields.SetField("ACCOUNTNO", "");
-					pdfFormFields.SetField("PAYROLLDATE", "");
+					pdfFormFields.SetField("ACCOUNTNO", payslipHeader.AccountNumber);
+					pdfFormFields.SetField("PAYROLLDATE", payslipHeader.PayrollDate.Value.ToShortDateString());
 					
 					pdfFormFields.SetField("TotalEarnings", TotalSalary.ToString());
 					pdfFormFields.SetField("TotalDeductions", TotalDeductions.ToString());
 					pdfFormFields.SetField("NETPAY", (TotalSalary - TotalDeductions).ToString());
 
-					pdfFormFields.SetField("YTDINCOME", "");
-					pdfFormFields.SetField("YTDTAX", "");
-					pdfFormFields.SetField("YTDSSF", "");
-					pdfFormFields.SetField("YTDPF", "");
-					pdfFormFields.SetField("YTDPFEMPLOYER", "");
+					pdfFormFields.SetField("YTDINCOME", payslipHeader.YTDINCOME.ToString());
+					pdfFormFields.SetField("YTDTAX", payslipHeader.YTDTAX.ToString());
+					pdfFormFields.SetField("YTDSSF", payslipHeader.YTDSSF.ToString());
+					pdfFormFields.SetField("YTDPF", payslipHeader.YTDPF.ToString());
+					pdfFormFields.SetField("YTDPFEMPLOYER", payslipHeader.YTDPFEMPLOYER.ToString());
 
 					int count = dcount;
 					for (int i = 0; i < validcount; i++)

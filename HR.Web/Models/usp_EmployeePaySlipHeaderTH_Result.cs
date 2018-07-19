@@ -14,7 +14,7 @@ namespace HR.Web.Models
     public partial class usp_EmployeePaySlipHeaderTH_Result
     {
         public string CompanyName { get; set; }
-        public Nullable<int> BranchID { get; set; }
+        public Nullable<long> BranchID { get; set; }
         public string BranchName { get; set; }
         public string RegNo { get; set; }
         public string BranchCode { get; set; }
@@ -31,7 +31,7 @@ namespace HR.Web.Models
         public string ZipCode { get; set; }
         public string TelNo { get; set; }
         public string FaxNo { get; set; }
-        public Nullable<int> EmployeeId { get; set; }
+        public string EmployeeId { get; set; }
         public string IDNumber { get; set; }
         public string SalutationType { get; set; }
         public string FirstName { get; set; }
@@ -41,5 +41,12 @@ namespace HR.Web.Models
         public string EPFNO { get; set; }
         public string EmployeeDescription { get; set; }
         public string EmployeeDepartment { get; set; }
+        public Nullable<decimal> YTDINCOME { get; set; }
+        public Nullable<decimal> YTDTAX { get; set; }
+        public Nullable<decimal> YTDSSF { get; set; }
+        public Nullable<decimal> YTDPF { get; set; }
+        public Nullable<decimal> YTDPFEMPLOYER { get; set; }
+        public string AccountNumber { get; set; }
+        public Nullable<System.DateTime> PayrollDate { get; set; }
     }
 }

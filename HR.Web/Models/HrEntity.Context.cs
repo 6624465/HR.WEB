@@ -185,27 +185,6 @@ namespace HR.Web.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_EmployeePaySlipDetailTH_Result>("usp_EmployeePaySlipDetailTH", branchIdParameter, employeeIDParameter, monthParameter, yearParameter);
         }
     
-        public virtual ObjectResult<usp_EmployeePaySlipHeaderTH_Result> usp_EmployeePaySlipHeaderTH(Nullable<int> branchId, Nullable<int> employeeID, Nullable<int> year, Nullable<int> month)
-        {
-            var branchIdParameter = branchId.HasValue ?
-                new ObjectParameter("BranchId", branchId) :
-                new ObjectParameter("BranchId", typeof(int));
-    
-            var employeeIDParameter = employeeID.HasValue ?
-                new ObjectParameter("EmployeeID", employeeID) :
-                new ObjectParameter("EmployeeID", typeof(int));
-    
-            var yearParameter = year.HasValue ?
-                new ObjectParameter("Year", year) :
-                new ObjectParameter("Year", typeof(int));
-    
-            var monthParameter = month.HasValue ?
-                new ObjectParameter("Month", month) :
-                new ObjectParameter("Month", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_EmployeePaySlipHeaderTH_Result>("usp_EmployeePaySlipHeaderTH", branchIdParameter, employeeIDParameter, yearParameter, monthParameter);
-        }
-    
         public virtual ObjectResult<usp_TAVSummaryByEmployeeTH_Result> usp_TAVSummaryByEmployeeTH(Nullable<int> branchId, Nullable<int> employeeID, Nullable<int> year)
         {
             var branchIdParameter = branchId.HasValue ?
@@ -277,6 +256,27 @@ namespace HR.Web.Models
                 new ObjectParameter("Year", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_SSFSummaryHeaderByMonthTH_Result>("usp_SSFSummaryHeaderByMonthTH", branchIdParameter, monthParameter, yearParameter);
+        }
+    
+        public virtual ObjectResult<usp_EmployeePaySlipHeaderTH_Result> usp_EmployeePaySlipHeaderTH(Nullable<int> branchId, Nullable<int> employeeID, Nullable<int> year, Nullable<int> month)
+        {
+            var branchIdParameter = branchId.HasValue ?
+                new ObjectParameter("BranchId", branchId) :
+                new ObjectParameter("BranchId", typeof(int));
+    
+            var employeeIDParameter = employeeID.HasValue ?
+                new ObjectParameter("EmployeeID", employeeID) :
+                new ObjectParameter("EmployeeID", typeof(int));
+    
+            var yearParameter = year.HasValue ?
+                new ObjectParameter("Year", year) :
+                new ObjectParameter("Year", typeof(int));
+    
+            var monthParameter = month.HasValue ?
+                new ObjectParameter("Month", month) :
+                new ObjectParameter("Month", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_EmployeePaySlipHeaderTH_Result>("usp_EmployeePaySlipHeaderTH", branchIdParameter, employeeIDParameter, yearParameter, monthParameter);
         }
     }
 }
