@@ -988,18 +988,20 @@ namespace HR.Web.Controllers
 					//pdfFormFields.SetField("Year", month.ToString());
 					pdfFormFields.SetField("ACCOUNTNO", payslipHeader.AccountNumber);
 					pdfFormFields.SetField("PAYROLLDATE", payslipHeader.PayrollDate.Value.ToShortDateString());
-					
-					pdfFormFields.SetField("TotalEarnings", TotalSalary.ToString());
-					pdfFormFields.SetField("TotalDeductions", TotalDeductions.ToString());
-					pdfFormFields.SetField("NETPAY", (TotalSalary - TotalDeductions).ToString());
 
-					pdfFormFields.SetField("YTDINCOME", payslipHeader.YTDINCOME.ToString());
-					pdfFormFields.SetField("YTDTAX", payslipHeader.YTDTAX.ToString());
-					pdfFormFields.SetField("YTDSSF", payslipHeader.YTDSSF.ToString());
-					pdfFormFields.SetField("YTDPF", payslipHeader.YTDPF.ToString());
-					pdfFormFields.SetField("YTDPFEMPLOYER", payslipHeader.YTDPFEMPLOYER.ToString());
 
-					int count = dcount;
+                   
+                    pdfFormFields.SetField("TotalEarnings", string.Format("{0:###,###,###.## }", TotalSalary).ToString());
+                    pdfFormFields.SetField("TotalDeductions", string.Format("{0:###,###,###.## }", TotalDeductions).ToString());
+                    pdfFormFields.SetField("NETPAY", string.Format("{0:###,###,###.## }", (TotalSalary - TotalDeductions)).ToString());
+
+                    pdfFormFields.SetField("YTDINCOME", string.Format("{0:###,###,###.## }", payslipHeader.YTDINCOME).ToString());
+                    pdfFormFields.SetField("YTDTAX", string.Format("{0:###,###,###.## }", payslipHeader.YTDTAX).ToString());
+                    pdfFormFields.SetField("YTDSSF", string.Format("{0:###,###,###.## }", payslipHeader.YTDSSF).ToString());
+                    pdfFormFields.SetField("YTDPF", string.Format("{0:###,###,###.## }", payslipHeader.YTDPF).ToString());
+                    pdfFormFields.SetField("YTDPFEMPLOYER", string.Format("{0:###,###,###.## }", payslipHeader.YTDPFEMPLOYER).ToString());
+
+                    int count = dcount;
 					for (int i = 0; i < validcount; i++)
 					{
 						if (count < payslipDetail.Count)
@@ -1007,8 +1009,15 @@ namespace HR.Web.Controllers
 							if (payslipDetail[i].RegisterCode == "BASIC SALARY")
 							{
 								pdfFormFields.SetField("E" + i, payslipDetail[i].ContributionCode.ToString());
-								pdfFormFields.SetField("A" + i, payslipDetail[i].Amount.ToString());
-							}
+                                if (payslipDetail[i].Amount != 0.0M)
+                                {
+                                    pdfFormFields.SetField("A" + i, string.Format("{0:###,###,###.## }", payslipDetail[i].Amount).ToString());
+                                }
+                                else
+                                {
+                                    pdfFormFields.SetField("A" + i, string.Format("{0:0.00}", payslipDetail[i].Amount).ToString());
+                                }
+                            }
 
 						}
 						count++;
@@ -1025,9 +1034,16 @@ namespace HR.Web.Controllers
 							if (payslipDetail[i].RegisterCode == "EMPLOYEE CONTRIBUTION")
 							{
 								pdfFormFields.SetField("D" + p, payslipDetail[i].ContributionCode.ToString());
-								pdfFormFields.SetField("DA" + p, payslipDetail[i].Amount.ToString());
+                                if ( payslipDetail[i].Amount != 0.0M) {
+                                    pdfFormFields.SetField("DA" + p, string.Format("{0:###,###,###.## }", payslipDetail[i].Amount).ToString());
+                                }
+                                else
+                                {
+                                    pdfFormFields.SetField("DA" + p, string.Format("{0:0.00}", payslipDetail[i].Amount).ToString());
+                                }
+                               
 
-								p++;
+                                p++;
 							}
 						}
 						count++;
