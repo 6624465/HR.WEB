@@ -991,12 +991,12 @@ namespace HR.Web.Controllers
 
 
                    
-                    pdfFormFields.SetField("TotalEarnings", string.Format("{0:###,###,###.## }", TotalSalary).ToString());
-                    pdfFormFields.SetField("TotalDeductions", string.Format("{0:###,###,###.## }", TotalDeductions).ToString());
-                    pdfFormFields.SetField("NETPAY", string.Format("{0:###,###,###.## }", (TotalSalary - TotalDeductions)).ToString());
+                    pdfFormFields.SetField("TotalEarnings", string.Format("{0:###,###,###.00## }", TotalSalary).ToString());
+                    pdfFormFields.SetField("TotalDeductions", string.Format("{0:###,###,###.00## }", TotalDeductions).ToString());
+                    pdfFormFields.SetField("NETPAY", string.Format("{0:###,###,###.00## }", (TotalSalary - TotalDeductions)).ToString());
                     if (payslipHeader.YTDINCOME != 0.0M)
                     {
-                        pdfFormFields.SetField("YTDINCOME", string.Format("{0:###,###,###.## }", payslipHeader.YTDINCOME).ToString());
+                        pdfFormFields.SetField("YTDINCOME", string.Format("{0:###,###,###.00## }", payslipHeader.YTDINCOME).ToString());
                     }
                     else
                     {
@@ -1004,7 +1004,7 @@ namespace HR.Web.Controllers
                     }
                     if (payslipHeader.YTDTAX != 0.0M)
                     {
-                        pdfFormFields.SetField("YTDTAX", string.Format("{0:###,###,###.## }", payslipHeader.YTDTAX).ToString());
+                        pdfFormFields.SetField("YTDTAX", string.Format("{0:###,###,###.00## }", payslipHeader.YTDTAX).ToString());
                     }
                     else
                     {
@@ -1012,7 +1012,7 @@ namespace HR.Web.Controllers
                     }
                     if (payslipHeader.YTDSSF != 0.0M)
                     {
-                        pdfFormFields.SetField("YTDSSF", string.Format("{0:###,###,###.## }", payslipHeader.YTDSSF).ToString());
+                        pdfFormFields.SetField("YTDSSF", string.Format("{0:###,###,###.00## }", payslipHeader.YTDSSF).ToString());
                     }
                     else
                     {
@@ -1020,7 +1020,7 @@ namespace HR.Web.Controllers
                     }
                     if (payslipHeader.YTDPF != 0.0M)
                     {
-                        pdfFormFields.SetField("YTDPF", string.Format("{0:###,###,###.## }", payslipHeader.YTDPF).ToString());
+                        pdfFormFields.SetField("YTDPF", string.Format("{0:###,###,###.00## }", payslipHeader.YTDPF).ToString());
                     }
                     else
                     {
@@ -1028,7 +1028,7 @@ namespace HR.Web.Controllers
                     }
                     if (payslipHeader.YTDPFEMPLOYER != 0.0M)
                     {
-                        pdfFormFields.SetField("YTDPFEMPLOYER", string.Format("{0:###,###,###.## }", payslipHeader.YTDPFEMPLOYER).ToString());
+                        pdfFormFields.SetField("YTDPFEMPLOYER", string.Format("{0:###,###,###.00## }", payslipHeader.YTDPFEMPLOYER).ToString());
                     }
                     else
                     {
@@ -1046,7 +1046,7 @@ namespace HR.Web.Controllers
 								pdfFormFields.SetField("E" + i, payslipDetail[i].ContributionCode.ToString());
                                 if (payslipDetail[i].Amount != 0.0M)
                                 {
-                                    pdfFormFields.SetField("A" + i, string.Format("{0:###,###,###.## }", payslipDetail[i].Amount).ToString());
+                                    pdfFormFields.SetField("A" + i, string.Format("{0:###,###,###.00## }", payslipDetail[i].Amount).ToString());
                                 }
                                 else
                                 {
@@ -1070,7 +1070,7 @@ namespace HR.Web.Controllers
 							{
 								pdfFormFields.SetField("D" + p, payslipDetail[i].ContributionCode.ToString());
                                 if ( payslipDetail[i].Amount != 0.0M) {
-                                    pdfFormFields.SetField("DA" + p, string.Format("{0:###,###,###.## }", payslipDetail[i].Amount).ToString());
+                                    pdfFormFields.SetField("DA" + p, string.Format("{0:###,###,###.00## }", payslipDetail[i].Amount).ToString());
                                 }
                                 else
                                 {
