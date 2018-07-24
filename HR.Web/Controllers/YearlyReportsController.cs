@@ -989,11 +989,32 @@ namespace HR.Web.Controllers
 					pdfFormFields.SetField("ACCOUNTNO", payslipHeader.AccountNumber);
 					pdfFormFields.SetField("PAYROLLDATE", payslipHeader.PayrollDate.Value.ToShortDateString());
 
+                    if (TotalSalary != 0.0M)
+                    {
+                        pdfFormFields.SetField("TotalEarnings", string.Format("{0:###,###,###.00## }", TotalSalary).ToString());
+                    }
+                    else
+                    {
+                        pdfFormFields.SetField("TotalEarnings", string.Format("{0:0.00 }", TotalSalary).ToString());
+                    }
+                    if (TotalDeductions != 0.0M)
+                    {
+                        pdfFormFields.SetField("TotalDeductions", string.Format("{0:###,###,###.00## }", TotalDeductions).ToString());
+                    }
+                    else
+                    {
+                        pdfFormFields.SetField("TotalDeductions", string.Format("{0:0.00 }", TotalDeductions).ToString());
+                    }
+                    if ((TotalSalary - TotalDeductions) != 0.0M)
+                    {
+                        pdfFormFields.SetField("NETPAY", string.Format("{0:###,###,###.00## }", (TotalSalary - TotalDeductions)).ToString());
+                    }
+                    else
+                    {
+                        pdfFormFields.SetField("NETPAY", string.Format("{0:0.00}", (TotalSalary - TotalDeductions)).ToString());
+                    }
 
                    
-                    pdfFormFields.SetField("TotalEarnings", string.Format("{0:###,###,###.00## }", TotalSalary).ToString());
-                    pdfFormFields.SetField("TotalDeductions", string.Format("{0:###,###,###.00## }", TotalDeductions).ToString());
-                    pdfFormFields.SetField("NETPAY", string.Format("{0:###,###,###.00## }", (TotalSalary - TotalDeductions)).ToString());
                     if (payslipHeader.YTDINCOME != 0.0M)
                     {
                         pdfFormFields.SetField("YTDINCOME", string.Format("{0:###,###,###.00## }", payslipHeader.YTDINCOME).ToString());
