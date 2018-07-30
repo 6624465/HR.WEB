@@ -128,16 +128,30 @@ namespace HR.Web.Controllers
             {
                 using (var dbCntx = new HrDataContext())
                 {
+                    //var list = dbCntx.EmployeeHeaders.Join(dbCntx.EmployeeWorkDetails,
+                    //   a => a.EmployeeId, b => b.EmployeeId, (a, b) => new { A = a, B = b }).
+                    //   Where(x => x.A.BranchId == BRANCHID && x.A.IsActive == true).
+                    //   Select(x => new EmployeeTable
+                    //   {
+                    //       EmployeeName = x.A.FirstName + " " + x.A.LastName,
+                    //       EmployeeDesignation = dbCntx.LookUps.Where(y => y.LookUpID == x.B.DesignationId).FirstOrDefault().LookUpDescription,
+                    //       ManagerName = dbCntx.EmployeeHeaders.Where(y => y.EmployeeId == x.A.ManagerId).FirstOrDefault().FirstName,
+                    //       EmployeeId = x.A.EmployeeId,
+                    //   }).ToList();
+
                     var list = dbCntx.EmployeeHeaders.Join(dbCntx.EmployeeWorkDetails,
-                       a => a.EmployeeId, b => b.EmployeeId, (a, b) => new { A = a, B = b }).
-                       Where(x => x.A.BranchId == BRANCHID && x.A.IsActive == true).
-                       Select(x => new EmployeeTable
-                       {
-                           EmployeeName = x.A.FirstName + " " + x.A.LastName,
-                           EmployeeDesignation = dbCntx.LookUps.Where(y => y.LookUpID == x.B.DesignationId).FirstOrDefault().LookUpDescription,
-                           ManagerName = dbCntx.EmployeeHeaders.Where(y => y.EmployeeId == x.A.ManagerId).FirstOrDefault().FirstName,
-                           EmployeeId = x.A.EmployeeId,
-                       }).ToList();
+                        emphd => emphd.EmployeeId, Empwdt => Empwdt.EmployeeId, (emphd, Empwdt) => new { EmpHd = emphd, EmpWDt = Empwdt }).
+                        Join(dbCntx.SalaryStructureHeaders,
+                        hd => hd.EmpHd.EmployeeId, shd => shd.EmployeeId, (hd, shd) => new { Emph = hd, SHD = shd }).
+                        Join(dbCntx.SalaryStructureDetails,
+                        SHde => SHde.SHD.StructureID, sdt => sdt.StructureID, (SHde, sdt) => new { NShd = SHde, SDT = sdt }).Where(x => x.SDT.IsVariablePay == true && x.NShd.SHD.BranchId == BRANCHID).
+                        Select(x => new EmployeeTable
+                        {
+                            EmployeeName = x.NShd.Emph.EmpHd.FirstName + " " + x.NShd.Emph.EmpHd.LastName,
+                            EmployeeDesignation = dbCntx.LookUps.Where(y => y.LookUpID == x.NShd.Emph.EmpWDt.DesignationId).FirstOrDefault().LookUpDescription,
+                            ManagerName = dbCntx.EmployeeHeaders.Where(y => y.EmployeeId == x.NShd.Emph.EmpHd.ManagerId).FirstOrDefault().FirstName,
+                            EmployeeId = x.NShd.Emph.EmpHd.EmployeeId,
+                        }).ToList();
 
                     var transactioncount = variablepaymentheaderBo.GetCount(BRANCHID);
                     transactioncount = transactioncount + 1;
