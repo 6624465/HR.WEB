@@ -144,7 +144,7 @@ namespace HR.Web.Controllers
                         Join(dbCntx.SalaryStructureHeaders,
                         hd => hd.EmpHd.EmployeeId, shd => shd.EmployeeId, (hd, shd) => new { Emph = hd, SHD = shd }).
                         Join(dbCntx.SalaryStructureDetails,
-                        SHde => SHde.SHD.StructureID, sdt => sdt.StructureID, (SHde, sdt) => new { NShd = SHde, SDT = sdt }).Where(x => x.SDT.IsVariablePay == true && x.NShd.SHD.BranchId == BRANCHID).
+                        SHde => SHde.SHD.StructureID, sdt => sdt.StructureID, (SHde, sdt) => new { NShd = SHde, SDT = sdt }).Where(x => x.SDT.IsVariablePay == true && x.NShd.SHD.BranchId == BRANCHID && x.NShd.Emph.EmpHd.IsActive==true).
                         Select(x => new EmployeeTable
                         {
                             EmployeeName = x.NShd.Emph.EmpHd.FirstName + " " + x.NShd.Emph.EmpHd.LastName,
