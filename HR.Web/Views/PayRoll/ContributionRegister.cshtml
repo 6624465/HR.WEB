@@ -38,35 +38,44 @@
                             <label class="col-md-2 control-label">
                                 <span class="pull-right">Name</span>
                             </label>
-                                <div class="col-md-4">
-                                    @Html.TextBoxFor(x => x.Name, new { @class = "form-control input-sm uppercase" })
-                                </div>
+                            @if (Model.ContributionId != 0)
+    {
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(x => x.Name, new { @class = "form-control input-sm uppercase", disabled = "disabled" })
+                        </div>
+}
+else
+{
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(x => x.Name, new { @class = "form-control input-sm uppercase" })
+                        </div>
+                            }
                         </div>
                         <div class="row css5">
                             <label class="col-md-2 control-label">
                                 <span class="pull-right">Register Code</span>
                             </label>
                             @{
-                                var ContributionRegister = SelectListItemHelper.Deductions();
+        var ContributionRegister = SelectListItemHelper.Deductions();
                             }
                             @if (Model.ContributionId != 0)
-                            {
-                                <div class="col-md-4">
-                                    @Html.DropDownListFor(x => x.RegisterCode,
-                                                                    new SelectList(ContributionRegister,
-                                                                    "Value", "Text", Model.RegisterCode), "", new { @class = "form-control input-sm"})
-                                </div>
-                            }
-                            else
-                            {
-                                <div class="col-md-4">
-                                    @Html.DropDownListFor(x => x.RegisterCode,
-                                                                    new SelectList(ContributionRegister,
-                                                                    "Value", "Text", Model.RegisterCode), "", new { @class = "form-control input-sm", onchange = "checkComponent(this)" })
-                                    <label id="error">Salary Component Already Exists.</label>
-                                </div>
-                            }
-                            
+    {
+                        <div class="col-md-4">
+                            @Html.DropDownListFor(x => x.RegisterCode,
+                                         new SelectList(ContributionRegister,
+                                         "Value", "Text", Model.RegisterCode), "", new { @class = "form-control input-sm" })
+                        </div>
+}
+else
+{
+                        <div class="col-md-4">
+                            @Html.DropDownListFor(x => x.RegisterCode,
+                                         new SelectList(ContributionRegister,
+                                         "Value", "Text", Model.RegisterCode), "", new { @class = "form-control input-sm", onchange = "checkComponent(this)" })
+                            <label id="error">Salary Component Already Exists.</label>
+                        </div>
+}
+
                         </div>
                         <div class="row css5">
                             <label class="col-md-2 control-label">
@@ -93,7 +102,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                        </div>
                 </div>
             </div>
         </div>
