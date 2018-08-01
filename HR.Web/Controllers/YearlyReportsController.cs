@@ -981,7 +981,7 @@ namespace HR.Web.Controllers
 					//pdfFormFields.SetField("BranchAddress", payslipHeader.Address1);
 					//pdfFormFields.SetField("BranchTaxCode", payslipHeader.BranchTaxCode);
 					pdfFormFields.SetField("EMPNO", payslipHeader.EmployeeId.ToString());
-					pdfFormFields.SetField("EMPNAME", payslipHeader.SalutationType + "." + payslipHeader.FirstName.ToString() + (payslipHeader.MiddleName != null ? " " + payslipHeader.MiddleName : ""));
+					pdfFormFields.SetField("EMPNAME", payslipHeader.SalutationType + "." + payslipHeader.FirstName.ToString() + (payslipHeader.MiddleName != null ? " " + payslipHeader.MiddleName : "") + (payslipHeader.LastName != null ? " " + payslipHeader.LastName : ""));
 					//pdfFormFields.SetField("Designation", payslipHeader.EmployeeDescription);
 					pdfFormFields.SetField("DEPT", payslipHeader.EmployeeDepartment);
 					//pdfFormFields.SetField("Month", year.ToString());
