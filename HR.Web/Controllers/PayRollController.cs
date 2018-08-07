@@ -1992,6 +1992,29 @@ namespace HR.Web.Controllers
             HtmlTblVm.CurrentPage = page.Value;
             return View(HtmlTblVm);
         }
+
+        public ActionResult EmployeePrevWHT()
+        {
+            using (var dbCntx = new HrDataContext())
+            {
+                var context = new HttpContextWrapper(System.Web.HttpContext.Current);
+                var query = dbCntx.usp_EmployeeDetail(BRANCHID, ROLECODE);
+
+                var list = query.OrderBy(x => x.EmployeeId)
+            .ToList()
+            .AsEnumerable();
+
+               
+
+                var empDirectoryVm = new EmpDirectoryResultVm
+                {
+                    employeeVm = list
+                };
+
+
+                return View(empDirectoryVm);
+            }
+        }
     }
 }
    

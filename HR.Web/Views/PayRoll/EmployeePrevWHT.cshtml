@@ -1,0 +1,115 @@
+﻿@model HR.Web.ViewModels.EmpDirectoryResultVm
+@{
+    ViewBag.Title = "EmployeePrevWHT";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@section Styles{
+
+    <style>
+
+        .page-dashboard .profile-widget .right-side > img {
+            width: 52px;
+            height: 52px;
+            border-radius: 100%;
+        }
+
+        .pagination {
+            display: table;
+            margin: 15px auto;
+            position: relative;
+            float: right;
+        }
+
+        .width {
+            width: 80%;
+        }
+
+        .panl-height {
+            height: 250px;
+        }
+
+        #email {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
+}
+
+<div class="page">
+
+    <div class="page-wrap">
+        <div class="panel panel-default">
+
+            <div class="panel-heading">
+                Employee Previous WHT
+            </div>
+
+            <div class="panel-body">
+                <div class="row" id="tableGrid">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table table-condensed table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Employee Name
+                                        </th>
+                                        <th>
+                                            รายได้
+                                        </th>
+                                        <th>
+                                            ประกันสังคมลูกจ้าง
+                                        </th>
+                                        <th>
+                                            กองทุนสำรองเลี้ยงชีพ
+                                        </th>
+                                        <th>
+                                            ภาษีหัก ณ ที่จ่าย
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @foreach (var item in Model.employeeVm.ToList())
+                                    {
+                                        <tr>
+                                            <td>@item.EmployeeName</td>
+                                            <td>@Html.TextBox("Income", "", new { @class = "form-control input-sm decimalCss", placeholder = "Income" })</td>
+                                            <td>@Html.TextBox("SSF", "", new { @class = "form-control input-sm decimalCss", placeholder = "SSF" })</td>
+                                            <td>@Html.TextBox("PF", "", new { @class = "form-control input-sm decimalCss", placeholder = "PF" })</td>
+                                            <td>@Html.TextBox("WHT", "", new { @class = "form-control input-sm decimalCss", placeholder = "WHT" })</td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <button type="button" class="btn btn-primary btn-sm" onclick="Savetrans()"><i class="fa fa-floppy-o"></i>Save</button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="~/Scripts/Core/jquery.bootpag.min.js"></script>
+    <script src="~/Scripts/Core/jquery.tmpl.min.js"></script>
+    <script>
+        $(function () {
+            $('#li_PayRollConfig').addClass('open');
+            $('#li_EmployeePrevWHT').addClass('active');
+        });
+    </script>
+}
+/**/
+/**/
+
+
