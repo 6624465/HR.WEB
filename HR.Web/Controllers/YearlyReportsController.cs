@@ -172,10 +172,10 @@ namespace HR.Web.Controllers
                     pdfFormFields.SetField("PhoneNo", sSFHeader.TelNo);
                     pdfFormFields.SetField("FaxNo", sSFHeader.FaxNo);
 
-                    pdfFormFields.SetField("TotalSalary", TotalSalary.ToString());
-                    pdfFormFields.SetField("TotalEmployeeContribution", TotalEmployeeContribution.ToString());
-                    pdfFormFields.SetField("TotalEmployerContribution", TotalEmployerContribution.ToString());
-                    pdfFormFields.SetField("Total", (TotalEmployeeContribution + TotalEmployerContribution).ToString());
+                    pdfFormFields.SetField("TotalSalary", string.Format("{0:###,###,###.00## }", TotalSalary).ToString());
+                    pdfFormFields.SetField("TotalEmployeeContribution", string.Format("{0:###,###,###.00## }", TotalEmployeeContribution).ToString());
+                    pdfFormFields.SetField("TotalEmployerContribution", string.Format("{0:###,###,###.00## }", TotalEmployerContribution).ToString());
+                    pdfFormFields.SetField("Total", string.Format("{0:###,###,###.00## }", (TotalEmployeeContribution + TotalEmployerContribution)).ToString());
 
                     string strToBaht = "";
 
@@ -240,13 +240,13 @@ namespace HR.Web.Controllers
                                 }
                             }
 
-                            pdfFormFields.SetField("ESalary" + i, sSFDetail[i].TotalSalary.ToString());
-                            pdfFormFields.SetField("ECont" + i, sSFDetail[i].Amount.ToString());
+                            pdfFormFields.SetField("ESalary" + i, string.Format("{0:###,###,###.00## }", sSFDetail[i].TotalSalary).ToString());
+                            pdfFormFields.SetField("ECont" + i, string.Format("{0:###,###,###.00## }", sSFDetail[i].Amount).ToString());
                         }
                         else if (count == sSFDetail.Count())
                         {
-                            pdfFormFields.SetField("ESalaryTotal", TotalSalary.ToString());
-                            pdfFormFields.SetField("EContTotal", TotalEmployeeContribution.ToString());
+                            pdfFormFields.SetField("ESalaryTotal", string.Format("{0:###,###,###.00## }", TotalSalary).ToString());
+                            pdfFormFields.SetField("EContTotal", string.Format("{0:###,###,###.00## }", TotalEmployeeContribution).ToString());
                             break;
                         }
                         count++;
@@ -406,11 +406,11 @@ namespace HR.Web.Controllers
                     pdfFormFields.SetField("NoOfAttachmentPages", pageCount.ToString());
                     pdfFormFields.SetField("NoOfEmp", PND1Detail.Count().ToString());
                     pdfFormFields.SetField("NoOfEmp1", PND1Detail.Count().ToString());
-                    pdfFormFields.SetField("TotalIncome", TotalSalary.ToString());
-                    pdfFormFields.SetField("TotalIncome1", TotalSalary.ToString());
-                    pdfFormFields.SetField("TotalWHT", TotalWHT.ToString());
-                    pdfFormFields.SetField("TotalWHT1", TotalWHT.ToString());
-                    pdfFormFields.SetField("GrandTotalWHT", TotalWHT.ToString());
+                    pdfFormFields.SetField("TotalIncome", string.Format("{0:###,###,###.00## }", TotalSalary).ToString());
+                    pdfFormFields.SetField("TotalIncome1", string.Format("{0:###,###,###.00## }", TotalSalary).ToString());
+                    pdfFormFields.SetField("TotalWHT", string.Format("{0:###,###,###.00## }", TotalWHT).ToString());
+                    pdfFormFields.SetField("TotalWHT1", string.Format("{0:###,###,###.00## }", TotalWHT).ToString());
+                    pdfFormFields.SetField("GrandTotalWHT", string.Format("{0:###,###,###.00## }", TotalWHT).ToString());
                     pdfFormFields.SetField("PageNo", PageNo.ToString());
                     pdfFormFields.SetField("TotalNoOfPages", pageCount.ToString());
 
@@ -431,15 +431,15 @@ namespace HR.Web.Controllers
                             pdfFormFields.SetField("EName" + i, title + PND1Detail[i].FirstName.ToString() + (PND1Detail[i].MiddleName != null ? " " + PND1Detail[i].MiddleName : ""));
                             pdfFormFields.SetField("ESurname" + i, PND1Detail[i].LastName.ToString());
                             pdfFormFields.SetField("PaymentDate" + i, PND1Detail[i].ProcessDate.Value.ToShortDateString().ToString());
-                            pdfFormFields.SetField("MonthlyIncome" + i, PND1Detail[i].TotalSalary.ToString());
-                            pdfFormFields.SetField("WHTPerMonth" + i, PND1Detail[i].Amount.ToString());
+                            pdfFormFields.SetField("MonthlyIncome" + i, string.Format("{0:###,###,###.00## }", PND1Detail[i].TotalSalary).ToString());
+                            pdfFormFields.SetField("WHTPerMonth" + i, string.Format("{0:###,###,###.00## }", PND1Detail[i].Amount).ToString());
 
                             pdfFormFields.SetField("t" + i, "1");
                         }
                         else if (count == PND1Detail.Count())
                         {
-                            pdfFormFields.SetField("TotalMonthlyIncome", TotalSalary.ToString());
-                            pdfFormFields.SetField("TotalMonthlyWHT", TotalWHT.ToString());
+                            pdfFormFields.SetField("TotalMonthlyIncome", string.Format("{0:###,###,###.00## }", TotalSalary).ToString());
+                            pdfFormFields.SetField("TotalMonthlyWHT", string.Format("{0:###,###,###.00## }", TotalWHT).ToString());
                             break;
                         }
                         count++;
@@ -574,12 +574,12 @@ namespace HR.Web.Controllers
                     pdfFormFields.SetField("NoOfEmp", PND1KDetail.Count().ToString());
                     pdfFormFields.SetField("NoOfEmp1", PND1KDetail.Count().ToString());
 
-                    pdfFormFields.SetField("TotalIncome", TotalTaxableIncome.ToString());
-                    pdfFormFields.SetField("TotalIncome1", TotalTaxableIncome.ToString());
-                    pdfFormFields.SetField("TotalWHT", TotalWHT.ToString());
-                    pdfFormFields.SetField("TotalWHT1", TotalWHT.ToString());
-                    pdfFormFields.SetField("GrandTotalIncome", TotalTaxableIncome.ToString());
-                    pdfFormFields.SetField("GrandTotalWHT", TotalWHT.ToString());
+                    pdfFormFields.SetField("TotalIncome", string.Format("{0:###,###,###.00## }", TotalTaxableIncome).ToString());
+                    pdfFormFields.SetField("TotalIncome1", string.Format("{0:###,###,###.00## }", TotalTaxableIncome).ToString());
+                    pdfFormFields.SetField("TotalWHT", string.Format("{0:###,###,###.00## }", TotalWHT).ToString());
+                    pdfFormFields.SetField("TotalWHT1", string.Format("{0:###,###,###.00## }", TotalWHT).ToString());
+                    pdfFormFields.SetField("GrandTotalIncome", string.Format("{0:###,###,###.00## }", TotalTaxableIncome).ToString());
+                    pdfFormFields.SetField("GrandTotalWHT", string.Format("{0:###,###,###.00## }", TotalWHT).ToString());
 
                     pdfFormFields.SetField("PageNo", PageNo.ToString());
                     pdfFormFields.SetField("NoOfPages", pageCount.ToString());
@@ -603,16 +603,16 @@ namespace HR.Web.Controllers
                             pdfFormFields.SetField("ESurname" + i, PND1KDetail[i].LastName.ToString());
                             pdfFormFields.SetField("EAddress" + i, PND1KDetail[i].Address1 + "," +
                             PND1KDetail[i].CityName + "," + PND1KDetail[i].StateName + "," + PND1KDetail[i].ZipCode);
-                            pdfFormFields.SetField("MonthlyIncome" + i, PND1KDetail[i].YearlyTaxableIncome.ToString());
-                            pdfFormFields.SetField("MonthWHT" + i, PND1KDetail[i].YearlyWithHoldingTax.ToString());
+                            pdfFormFields.SetField("MonthlyIncome" + i, string.Format("{0:###,###,###.00## }", PND1KDetail[i].YearlyTaxableIncome).ToString());
+                            pdfFormFields.SetField("MonthWHT" + i, string.Format("{0:###,###,###.00## }", PND1KDetail[i].YearlyWithHoldingTax).ToString());
 
                             pdfFormFields.SetField("t" + i, "1");
                         }
 
                         else if (count == PND1KDetail.Count())
                         {
-                            pdfFormFields.SetField("TotalIncome", TotalTaxableIncome.ToString());
-                            pdfFormFields.SetField("TotalWHT", TotalWHT.ToString());
+                            pdfFormFields.SetField("TotalIncome", string.Format("{0:###,###,###.00## }", TotalTaxableIncome).ToString());
+                            pdfFormFields.SetField("TotalWHT", string.Format("{0:###,###,###.00## }", TotalWHT).ToString());
                             break;
                         }
                         count++;
@@ -795,14 +795,14 @@ namespace HR.Web.Controllers
 
                     DateTime lastdayofYear = new DateTime(Convert.ToInt32(DateTime.Now.Year), 12, 31);
                     pdfFormFields.SetField("YearEndDate", lastdayofYear.ToString("dd-MM-yyyy"));
-                    pdfFormFields.SetField("CTC", TAVSummaryByEmployee.TotalSalary.ToString());
-                    pdfFormFields.SetField("TotalTDS", TAVSummaryByEmployee.TotalWHTax.ToString());
-                    pdfFormFields.SetField("CTC1", TAVSummaryByEmployee.TotalSalary.ToString());
-                    pdfFormFields.SetField("TotalTDS1", TAVSummaryByEmployee.TotalWHTax.ToString());
+                    pdfFormFields.SetField("CTC", string.Format("{0:###,###,###.00## }", TAVSummaryByEmployee.TotalSalary).ToString());
+                    pdfFormFields.SetField("TotalTDS", string.Format("{0:###,###,###.00## }", TAVSummaryByEmployee.TotalWHTax).ToString());
+                    pdfFormFields.SetField("CTC1", string.Format("{0:###,###,###.00## }", TAVSummaryByEmployee.TotalSalary).ToString());
+                    pdfFormFields.SetField("TotalTDS1", string.Format("{0:###,###,###.00## }", TAVSummaryByEmployee.TotalWHTax).ToString());
 
                     pdfFormFields.SetField("InWordsTotal", "");
-                    pdfFormFields.SetField("TotalSSF", TAVSummaryByEmployee.TotalSSF.ToString());
-                    pdfFormFields.SetField("TotalPF", TAVSummaryByEmployee.TotalPF.ToString());
+                    pdfFormFields.SetField("TotalSSF", string.Format("{0:###,###,###.00## }", TAVSummaryByEmployee.TotalSSF).ToString());
+                    pdfFormFields.SetField("TotalPF", string.Format("{0:###,###,###.00## }", TAVSummaryByEmployee.TotalPF).ToString());
 
                     pdfFormFields.SetField("chk1", "Yes", true);
 
