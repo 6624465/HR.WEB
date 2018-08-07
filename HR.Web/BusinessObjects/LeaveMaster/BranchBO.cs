@@ -93,7 +93,7 @@ namespace HR.Web.BusinessObjects.LeaveMaster
             Add(branch);
             Address branchAddress = new Address()
             {
-                Address1 = addressVm.Address1,
+                Address1 = (addressVm.Address1 == null ? "" : addressVm.Address1),
                 Address2 = addressVm.Address2,
                 Address3 = addressVm.Address3,
                 Address4 = addressVm.Address4,
@@ -107,15 +107,15 @@ namespace HR.Web.BusinessObjects.LeaveMaster
                 Address12 = addressVm.Address12,
                 Address13 = addressVm.Address13,
                 AddressType = UTILITY.BRANCH,
-                CityName = addressVm.CityName,
-                Contact = addressVm.Contact,
-                CountryCode = addressVm.CountryCode,
+                CityName = (addressVm.CityName == null ? "" : addressVm.CityName),
+                Contact = (addressVm.Contact == null ? "" : addressVm.Contact),
+                CountryCode = (addressVm.CountryCode == null ? "" : addressVm.CountryCode),
                 LinkID = branch.BranchID,
                 CreatedBy = sessionObj.USERID,
                 CreatedOn = UTILITY.SINGAPORETIME,
                 Email = addressVm.Email,
                 FaxNo = addressVm.FaxNo,
-                MobileNo = addressVm.MobileNo,
+                MobileNo = (addressVm.MobileNo == null ? "" : addressVm.MobileNo),
                 IsActive = true,
                 ModifiedBy = sessionObj.USERID,
                 ModifiedOn = UTILITY.SINGAPORETIME,

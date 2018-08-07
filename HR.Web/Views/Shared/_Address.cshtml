@@ -6,13 +6,15 @@
         <div class="row css5">
             <div class="form-group">
                 <label class="col-md-2 control-label">
-                    <span class="pull-right">Address1</span>
+                    <span class="pull-right">อาคาร</span>
                 </label>
                 <div class="col-md-4">
                     @Html.TextAreaFor(x => x.Address1, new { @class = "form-control input-sm",@maxlength="200" })
                 </div>
                 <label class="col-md-2 control-label">
-                    <span class="pull-right">Address2</span>
+                    <span class="pull-right">
+                        ห้องเลขที่
+                    </span>
                 </label>
                 <div class="col-md-4">
                     @Html.TextAreaFor(x => x.Address2, new { @class = "form-control input-sm" })
@@ -23,13 +25,15 @@
         <div class="row css5">
             <div class="form-group">
                 <label class="col-md-2 control-label">
-                    <span class="pull-right">Address3</span>
+                    <span class="pull-right">
+                        ชั้นที่
+                    </span>
                 </label>
                 <div class="col-md-4">
                     @Html.TextAreaFor(x => x.Address3, new { @class = "form-control input-sm", @maxlength = "200" })
                 </div>
                 <label class="col-md-2 control-label">
-                    <span class="pull-right">Address4</span>
+                    <span class="pull-right">หมู่บ้าน</span>
                 </label>
                 <div class="col-md-4">
                     @Html.TextAreaFor(x => x.Address4, new { @class = "form-control input-sm" })
@@ -40,13 +44,15 @@
         <div class="row css5">
             <div class="form-group">
                 <label class="col-md-2 control-label">
-                    <span class="pull-right">Address5</span>
+                    <span class="pull-right">เลขที่</span>
                 </label>
                 <div class="col-md-4">
                     @Html.TextAreaFor(x => x.Address5, new { @class = "form-control input-sm", @maxlength = "200" })
                 </div>
                 <label class="col-md-2 control-label">
-                    <span class="pull-right">Address6</span>
+                    <span class="pull-right">
+                        หมู่ที่
+                    </span>
                 </label>
                 <div class="col-md-4">
                     @Html.TextAreaFor(x => x.Address6, new { @class = "form-control input-sm" })
@@ -57,13 +63,15 @@
         <div class="row css5">
             <div class="form-group">
                 <label class="col-md-2 control-label">
-                    <span class="pull-right">Address7</span>
+                    <span class="pull-right">
+                        ตรอก/ซอย
+                    </span>
                 </label>
                 <div class="col-md-4">
                     @Html.TextAreaFor(x => x.Address7, new { @class = "form-control input-sm", @maxlength = "200" })
                 </div>
                 <label class="col-md-2 control-label">
-                    <span class="pull-right">Address8</span>
+                    <span class="pull-right">แยก</span>
                 </label>
                 <div class="col-md-4">
                     @Html.TextAreaFor(x => x.Address8, new { @class = "form-control input-sm" })
@@ -75,13 +83,15 @@
         <div class="row css5">
             <div class="form-group">
                 <label class="col-md-2 control-label">
-                    <span class="pull-right">Address9</span>
+                    <span class="pull-right">ถนน</span>
                 </label>
                 <div class="col-md-4">
                     @Html.TextAreaFor(x => x.Address9, new { @class = "form-control input-sm", @maxlength = "200" })
                 </div>
                 <label class="col-md-2 control-label">
-                    <span class="pull-right">Address10</span>
+                    <span class="pull-right">
+                        ตำบล/แขวง
+                    </span>
                 </label>
                 <div class="col-md-4">
                     @Html.TextAreaFor(x => x.Address10, new { @class = "form-control input-sm" })
@@ -93,13 +103,15 @@
         <div class="row css5">
             <div class="form-group">
                 <label class="col-md-2 control-label">
-                    <span class="pull-right">Address11</span>
+                    <span class="pull-right">
+                        อำเภอ/เขต
+                    </span>
                 </label>
                 <div class="col-md-4">
                     @Html.TextAreaFor(x => x.Address11, new { @class = "form-control input-sm", @maxlength = "200" })
                 </div>
                 <label class="col-md-2 control-label">
-                    <span class="pull-right">Address12</span>
+                    <span class="pull-right">จังหวัด</span>
                 </label>
                 <div class="col-md-4">
                     @Html.TextAreaFor(x => x.Address12, new { @class = "form-control input-sm" })
@@ -145,10 +157,10 @@
         <div class="row css5">
             <div class="form-group">
                 <label class="col-md-2 control-label">
-                    <span class="pull-right">Zip Code</span>
+                    <span class="pull-right">รหัสไปรษณีย์</span>
                 </label>
                 <div class="col-md-4">
-                    @Html.TextBoxFor(x => x.ZipCode, new { @class = "form-control number input-sm" })
+                    @Html.TextBoxFor(x => x.ZipCode, new { @class = "form-control  input-sm" })
                 </div>
                 <label class="col-md-2 control-label">
                     <span class="pull-right">Tel No</span>
@@ -182,7 +194,7 @@
                     <span class="pull-right">Contact</span>
                 </label>
                 <div class="col-md-4">
-                    @Html.TextBoxFor(x => x.Contact, new { @class = "form-control validatenumber input-sm" })
+                    @Html.TextBoxFor(x => x.Contact, new { @class = "form-control  input-sm" })
                 </div>
                 <label class="col-md-2 control-label">
                     <span class="pull-right">Email</span>
